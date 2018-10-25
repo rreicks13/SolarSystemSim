@@ -1,5 +1,13 @@
+import { CANVAS_SIZE_X, CANVAS_SIZE_Y } from './constants';
+
 export class Moon {
-    constructor(private p: p5, private x: number, private y: number) {
+    x = CANVAS_SIZE_X / 2;
+    y = CANVAS_SIZE_Y / 2;
+
+    constructor(
+        private p: p5,
+        private velocity: number,
+        private rOffset: number) {
 
     }
 
@@ -11,11 +19,11 @@ export class Moon {
         this.y = y;
     }
 
-    draw(time: number, radius: number, speed = 1) {
+    draw(time: number) {
         this.p.fill(211, 211, 211);
-        time = time * speed;
-        let x = this.p.cos(time * 0.0174532925) * radius + this.x;
-        let y = this.p.sin(time * 0.0174532925) * radius + this.y;
+        time = time * this.velocity;
+        let x = this.p.cos(time * 0.0174532925) * (40 + this.rOffset) + this.x;
+        let y = this.p.sin(time * 0.0174532925) * (40 + this.rOffset) + this.y;
         this.p.ellipse(x, y, 10);
     }
 }
